@@ -13,7 +13,7 @@ char **readFile(const char *filepath) {
     press[0] = new  char [2 * sizeof(int)];
     ((int*)(*press))[0] = column;
     ((int*)(*press))[1] = line;
-    for (int i = 1; i<= row; i++){
+    for (int i = 1; i<= line; i++){
         press[i] = new char [column];
         fscanf(f, "%s\n", press[i]);
     }
