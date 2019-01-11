@@ -1,8 +1,5 @@
-#include <iostream>
 #include "decoding_lib.h"
-#include "printing_lib.h"
-
-using namespace std;
+#include <iostream>
 
 /*
  * Меняет местами чётные и нечётные строки
@@ -25,6 +22,32 @@ void decodeStep1(char **&content){
     }
 }
 
+/*
+ * Меняет местами чётные и нечётные столбцы
+ */
+void decodeStep2(char **&content){
+    int long_ = ((int*)(*content))[0];
+    int kol_ = ((int*)(*content))[1];
+    if (long_ % 2 == 0) {
+        for (int i = 1; i <= kol_; i++) {
+            for (int j = 0; j <= long_; j = j + 2) {
+                char dop = content[i][j];
+                content[i][j] = content[i][j + 1];
+                content[i][j + 1] = dop;
+            }
+        }
+    } else if (long_ % 2 != 0) {
+        for (int i = 1; i <= kol_; i++) {
+            for (int j = 0; j < long_; j = j + 2) {
+                char dop = content[i][j];
+                content[i][j] = content[i][j + 1];
+                content[i][j + 1] = dop;
+            }
+        }
+    } else if (long_ == 1) {
+        std::cout << "Nothing to change!" << std::endl;
+    }
+}
 
 /*
  * Заменяет каждый 3ий символ в каждой строке на каждый 7ой с конца
@@ -39,11 +62,28 @@ void decodeStep3(char **&content) {
     }
     else {
         for (int i = 1; i <= kol_; i++) {
-           while (b >= 0)  {
+            while (b >= 0)  {
                 swap(content[i][a], content[i][b]);
                 a = a + 3;
                 b = b - 7;
             }
+        }
+    }
+}
+
+/*
+ * Инвертирует порядок символов нечётных столбцов
+ */
+void decodeStep7(char **&content){
+    int long_ = ((int*)(*content))[0];
+    int kol_ = ((int*)(*content))[1];
+    for (int i = 1; i <= long_; i = i + 2) { //столбец
+        int num = kol_;
+        for (int j = 1; j <= kol_ / 2; j++) {  //строка
+            char dop = content[j][i];
+            content[j][i] = content[num][i];
+            content[num][i] = dop;
+            num--;
         }
     }
 }
