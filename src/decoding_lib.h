@@ -15,7 +15,7 @@ void decodeStep1(char **content){
  * Меняет местами чётные и нечётные столбцы
  */
 void decodeStep2(char **content){
-    int count = ((int *) (*content))[1];
+    int count = ((int *) (*content))[0];
     for (int i = 2; i <= count; i += 2) {
         std::swap(content[i], content[i - 1]);
     }
@@ -91,7 +91,7 @@ void decodeStep5(char **content){
 void decodeStep6(char **content){
     int stb = ((int *) (*content))[0], str = ((int *) (*content))[1];
     for (int i = 2; i <= str; i += 2){
-        for (int j = 0, k = stb - 1; j <= k; j++, k--){
+        for (int j = 0, k = stb; j <= k; j++, k--){
             std:: swap(content[i][j], content[i][k]);
         }
     }
@@ -103,7 +103,7 @@ void decodeStep6(char **content){
 void decodeStep7(char **content){
     int stb = ((int *) (*content))[0], str = ((int *) (*content))[1];
     for (int j = 0; j <= stb; j += 2){
-        for (int i = 1, k = str - 1; i <= k; i++, k--){
+        for (int i = 1, k = str; i <= k; i++, k--){
             std:: swap(content[i][j], content[k][j]);
         }
     }
