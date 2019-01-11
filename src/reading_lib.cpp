@@ -10,7 +10,8 @@ char **readFile(const char *filepath) {  //filepath - the way to the file
         return nullptr;
     }
     fscanf(f, "%d\t%d\n", &long_, &kol_); //long_ - колв-во столбцов, длина строки; kol_ - кол-во строк
-    char **str = new char* [sizeof(int)*2];
+    char **str = new char* [kol_ + 1];
+    str[0] = new char[sizeof(int)*2];
     memcpy(str[0], &long_, sizeof(int));
     memcpy(str[0] + sizeof(int), &kol_, sizeof(int));
     for (int i = 1; i <= kol_; i++){
