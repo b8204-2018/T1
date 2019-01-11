@@ -1,5 +1,6 @@
 #include "decoding_lib.h"
 #include <iostream>
+using namespace std;
 
 /*
  * Меняет местами чётные и нечётные строки
@@ -84,6 +85,25 @@ void decodeStep7(char **&content){
             content[j][i] = content[num][i];
             content[num][i] = dop;
             num--;
+        }
+    }
+}
+
+/*
+ * Смещает символы стоящие на чётных (i+j) вправо на 13 символов в таблице ASCII
+ */
+void decodeStep8(char **&content) {
+    int long_ = ((int*)(*content))[0];
+    int kol_ = ((int*)(*content))[1];
+    for (int i = 1; i <= kol_; i++){
+        for (int j = 0; j < long_; j++){
+            if ((i + j) % 2 == 0){
+                if (((int) content[i][j] + 12) <= 127) {
+                    content[i][j] = (char)((int) content[i][j] + 12);
+                } else {
+                    cout << "Symbol " << content[i][j] << " + 13 symbols " << "doesn't exists in ASCII" << endl;
+                }
+            }
         }
     }
 }
