@@ -1,5 +1,5 @@
-#ifndef T1_DECODING_LIB_H
-#define T1_DECODING_LIB_H
+#ifndef T1_DECODING_H
+#define T1_DECODING_H
 
 /*
  * Меняет местами чётные и нечётные строки
@@ -46,4 +46,4 @@ void decodeStep8(char **&content);
  */
 void decodeStep9(char **&content);
 
-#endif //T1_DECODING_LIB_H
+#endif //T1_DECODING_H

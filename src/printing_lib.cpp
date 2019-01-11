@@ -7,4 +7,3 @@ void printContent(const char **content){
         printf("%s\n", content[i]);
     }
 }
-

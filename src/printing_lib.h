@@ -4,6 +4,6 @@
 /*
  * Выводит в стандартный поток вывода контент
  */
-void printContent(const char **content);
+void printContent(const char *const *const &content);
 
 #endif //T1_PRINTING_LIB_H
