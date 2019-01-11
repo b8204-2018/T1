@@ -47,3 +47,18 @@ void decodeStep3(char **&content) {
         }
     }
 }
+
+/*
+ * Смещает символы стоящие на нечётных (i+j) влево на 5 символов в таблице ASCII
+ */
+void decodeStep9(char **&content){
+
+    int long_ = ((int*)(*content))[0], kol_ = ((int*)(*content))[1];
+    for (int i = 1; i <= kol_; i++){
+        for (int j = 0; j < long_; j++){
+            if ((i+j) % 2 == 1){
+                content[i][j] = (char)((int) content[i][j] - 5);
+            }
+        }
+    }
+}
