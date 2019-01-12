@@ -1,12 +1,16 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.12.2)
 project(T1)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
-file(GLOB T1_SRC
-    main.cpp
-    "./src/*.h"
-    "./src/*.cpp"
-)
+include_directories(src)
 
-add_executable(T1 ${T1_SRC})
+add_executable(T1
+        src/decodeSteps.cpp
+        src/decoding_lib.h
+        src/printing_lib.h
+        src/prnt.cpp
+        src/rdn.cpp
+        src/reading_lib.h
+        CMakeLists.txt
+        main.cpp)
