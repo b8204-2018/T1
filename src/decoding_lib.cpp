@@ -51,42 +51,6 @@ void decodeStep2(char **&content){
 }
 
 /*
- * Заменяет каждый 2ий символ в каждом столбце на каждый 11ой с конца
- */
-void decodeStep4(char **&content) {
-	int long_ = ((int*)*content)[0];
-	int kol_ = ((int*)*content)[1];
-	if (kol_ > 11) {
-		for (int i = 0; i < long_; i++) {
-			int l = 2;
-			int r = kol__ - 11;
-			while ((l < kol_) && (r >= 0)) {
-				swap(content[l][i], content[r][i]);
-				l += 2;
-				r -= 11;
-			}
-		}
-	}
-}
-
-/*
- * Инвертирует порядок символов в чётных строках
- */
-void decodeStep6(char **&content) {
-	int long_ = ((int*)*content)[0];
-	int kol_ = ((int*)*content)[1];
-	for (int i = 0; i < kol_; i += 2) {
-		int l = 0;
-		int r = long_;
-		while (l < r) {
-			swap(content[i][l], content[i][r]);
-			l++;
-			r--;
-		}
-	}
-}
-
-/*
  * Заменяет каждый 3ий символ в каждой строке на каждый 7ой с конца
  */
 void decodeStep3(char **&content) {
@@ -106,6 +70,77 @@ void decodeStep3(char **&content) {
             }
         }
     }
+}
+
+/*
+ * Заменяет каждый 2ий символ в каждом столбце на каждый 11ой с конца
+ */
+void decodeStep4(char **&content) {
+    int long_ = ((int*)*content)[0];
+    int kol_ = ((int*)*content)[1];
+    if (kol_ > 11) {
+        for (int i = 0; i < long_; i++) {
+            int l = 2;
+            int r = kol__ - 11;
+            while ((l < kol_) && (r >= 0)) {
+                swap(content[l][i], content[r][i]);
+                l += 2;
+                r -= 11;
+            }
+        }
+    }
+}
+
+/*
+ * Транспонирует массив строк(меняет строки и столбцы местами)
+ */
+void decodeStep5(char **&content) {
+
+    int long_ = ((int *)(*content))[0], kol_ = ((int *)(*content))[1];
+    int len1 = kol_, count1 = long_;
+    int n = sizeof(int) * 2;
+    char str [long_][kol_+1];
+    for (int i = 0; i < long_; i++){
+                for (int j = 0; j < kol_; j++) {
+            str[i][j] = content[j + 1][i];
+        }
+        str[i][kol_] = '\0';
+    }
+
+    for (int i = 0; i <= long_; i++){
+        delete [] content[i];
+    }
+    delete [] content;
+
+    content = new char* [long_ + 1];
+    content[0] = new char [n];
+    ((int*)(*content))[0] = kol_;
+    ((int*)(*content))[1] = long_;
+    for (int i = 1; i <= long_; i++){
+        content[i] = new char [kol_];
+        content[i] = (char*) "";
+    }
+
+    for (int i = 1; i <= long_; i++){
+            content[i] = str[i-1];
+    }
+}
+
+/*
+ * Инвертирует порядок символов в чётных строках
+ */
+void decodeStep6(char **&content) {
+	int long_ = ((int*)*content)[0];
+	int kol_ = ((int*)*content)[1];
+	for (int i = 0; i < kol_; i += 2) {
+		int l = 0;
+		int r = long_;
+		while (l < r) {
+			swap(content[i][l], content[i][r]);
+			l++;
+			r--;
+		}
+	}
 }
 
 /*
