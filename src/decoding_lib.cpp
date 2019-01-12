@@ -82,7 +82,7 @@ void decodeStep4(char **&content) {
         for (int i = 0; i < long_; i++) {
             int l = 2;
             int r = kol__ - 11;
-            while ((l < kol_) && (r >= 0)) {
+            while ((l <= kol_) && (r > 0)) {
                 swap(content[l][i], content[r][i]);
                 l += 2;
                 r -= 11;
@@ -97,7 +97,6 @@ void decodeStep4(char **&content) {
 void decodeStep5(char **&content) {
 
     int long_ = ((int *)(*content))[0], kol_ = ((int *)(*content))[1];
-    int len1 = kol_, count1 = long_;
     int n = sizeof(int) * 2;
     char str [long_][kol_+1];
     for (int i = 0; i < long_; i++){
