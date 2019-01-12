@@ -63,10 +63,7 @@ void decodeStep6(char **content) {
             p --;
             j++;
         }
-
-
     }
-
 }
 
 void decodeStep7(char **content) {}
