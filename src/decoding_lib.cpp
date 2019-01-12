@@ -51,6 +51,42 @@ void decodeStep2(char **&content){
 }
 
 /*
+ * Заменяет каждый 2ий символ в каждом столбце на каждый 11ой с конца
+ */
+void decodeStep4(char **&content) {
+	int long_ = ((int*)*content)[0];
+	int kol_ = ((int*)*content)[1];
+	if (kol_ > 11) {
+		for (int i = 0; i < long_; i++) {
+			int l = 2;
+			int r = kol__ - 11;
+			while ((l < kol_) && (r >= 0)) {
+				swap(content[l][i], content[r][i]);
+				l += 2;
+				r -= 11;
+			}
+		}
+	}
+}
+
+/*
+ * Инвертирует порядок символов в чётных строках
+ */
+void decodeStep6(char **&content) {
+	int long_ = ((int*)*content)[0];
+	int kol_ = ((int*)*content)[1];
+	for (int i = 0; i < kol_; i += 2) {
+		int l = 0;
+		int r = long_;
+		while (l < r) {
+			swap(content[i][l], content[i][r]);
+			l++;
+			r--;
+		}
+	}
+}
+
+/*
  * Заменяет каждый 3ий символ в каждой строке на каждый 7ой с конца
  */
 void decodeStep3(char **&content) {
