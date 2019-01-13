@@ -107,6 +107,11 @@ void decodeStep5(char **&content){
         content[i] = new char [row + 1];
         memcpy(content[i], transp[i], strlen(transp[i]) + 1);
     }
+
+    for (int i = 0; i <= column; i++){
+        delete[] transp[i];
+    }
+    delete[] transp;
 }
 
 
