@@ -1,4 +1,5 @@
 #include "src/decoding_lib.h"
+#include <cstring>
 
 /*
  * Меняет местами чётные и нечётные строки
@@ -79,22 +80,32 @@ void decodeStep4(char **&content){
 void decodeStep5(char **&content){
     int column = ((int*)(*content))[0];
     int row = ((int*)(*content))[1];
-    char transp[column][row];
-    for (int i = 0; i <= column; i++){
-        for (int j = 1; j <= row; j++){
-            transp[i][j-1] = content[j][i];
-        }
-    }
-    for (int i = 0; i <= row; i++){
-        delete [] content[i]; //здесь на каком-то шаге SIGTRAP (Trace/breakpoint trap)
-    }                           //Спасите, помогите
-    delete [] content;
-    content = new char* [column + 1];
-    ((int*)(*content))[0] = row; //а еще однажды ему удалось пройти цикл выше и он сломался тут
-    ((int*)(*content))[1] = column;
+
+    char **transp = new char* [column + 1];
+    transp[0] = new char [2 * sizeof(int)];
+    ((int*)(*transp))[0] = row;
+    ((int*)(*transp))[1] = column;
     for (int i = 1; i <= column; i++){
-        content[i] = new char [row];
-        content[i] = transp[i - 1];
+        transp[i] = new char [row + 1];
+    }
+    for (int i = 1; i <= row; i++){
+        for (int j = 0; j < column; j++){
+            transp[j+1][i-1] = content[i][j];
+        }
+        transp[i][row + 1] = '\0';
+    }
+
+    for (int i = 0; i <= row; i++){
+        delete[] content[i];
+    }
+    delete[] content;
+
+    content = new char* [column + 1];
+    content[0] = new char [2 * sizeof(int)];
+    memcpy(content[0], transp[0], 2 * sizeof(int));
+    for (int i = 1; i <= column; i++){
+        content[i] = new char [row + 1];
+        memcpy(content[i], transp[i], strlen(transp[i]) + 1);
     }
 }
 
