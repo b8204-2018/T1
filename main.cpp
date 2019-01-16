@@ -2,11 +2,9 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-
 #include "src/reading_lib.h"
 #include "src/decoding_lib.h"
 #include "src/printing_lib.h"
-
 using namespace std;
 
 const int ERROR_NOT_ENOUGH_ARGS = -1;
@@ -42,9 +40,9 @@ int main(int argc, char **argv) {
     decodeStep4(content);
     printContent((const char **) content);
 
-    cout << "decodeStep5 done. Your matrix: "<< endl;
-    decodeStep5(content);
-    printContent((const char **) content);
+  //  cout << "decodeStep5 done. Your matrix: "<< endl;
+  //  decodeStep5(content);
+  //  printContent((const char **) content);
 
     cout << "decodeStep6 done. Your matrix: "<< endl;
     decodeStep6(content);

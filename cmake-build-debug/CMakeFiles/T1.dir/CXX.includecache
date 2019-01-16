@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/T1/src/decoding_lib.h
+
+C:/T1/src/decoding_lib.h.cpp
+cstring
+-
+cstdio
+-
+iostream
+-
+decoding_lib.h
+C:/T1/src/decoding_lib.h
+
