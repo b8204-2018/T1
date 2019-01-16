@@ -38,20 +38,55 @@ void decodeStep2(char **&content){
  * Заменяет каждый 3ий символ в каждой строке на каждый 7ой с конца
  */
 void decodeStep3(char **&content){
+    size_t sybolsInLine = ((size_t *)(*content))[0];
+    size_t numbString = ((size_t *)(*content))[1];
+    for (int i = 1; i <= numbString ; i++){
+        int j = 1, k = sybolsInLine;
+        while (((j +=2) < sybolsInLine) && ((k -=6) >= 0)){
+            swap(content[i][j], content[i][k]);
+            j += 2;
+            k -= 6;
+        }
+    }
 }
 
 /*
  * Заменяет каждый 2ий символ в каждом столбце на каждый 11ой с конца
  */
 void decodeStep4(char **&content){
-
+    size_t sybolsInLine = ((size_t *)(*content))[0];
+    size_t numbString = ((size_t *)(*content))[1];
+    for (int i = 1; i <= sybolsInLine ; i++){
+        int j = 1, k = numbString;
+        while (((j +=1) <= sybolsInLine) && ((k -=10) >= 0)){
+            swap(content[j][i], content[k][i]);
+            j += 1;
+            k -= 10;
+        }
+    }
 }
 
 /*
  * Транспонирует массив строк(меняет строки и столбцы местами)
  */
 void decodeStep5(char **&content) {
-
+    size_t sybolsInLine = ((size_t *)(*content))[0];
+    size_t numbString = ((size_t *)(*content))[1];
+    size_t numbString1 = sybolsInLine;
+    size_t sybolsInLine1 = numbString;
+    char **matrixTrans = new char *[numbString1 + 1];
+    size_t Razmernost = sizeof(size_t)*2;
+    matrixTrans[0] = new char[Razmernost];
+    ((size_t*)(*matrixTrans))[0] = sybolsInLine1;
+    ((size_t*)(*matrixTrans))[1] = numbString1;
+    for(size_t j = 1; j <= numbString1; j++) {
+        size_t k = 1;
+        for (size_t i = 1; i <= sybolsInLine1; i++) {
+            matrixTrans[j][k] = content[j][i];
+            k++;
+        }
+    }
+    content = matrixTrans;
 }
 
 /*
