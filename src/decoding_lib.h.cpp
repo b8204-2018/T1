@@ -114,9 +114,9 @@ void decodeStep7(char **&content) {
     size_t numbString = ((size_t *) (*content))[1];
     for (int i = 1; i <= sybolsInLine; i += 2) {
         int j = 1, k = numbString;
-        while (((j) <= numbString/2)) {
+        while (((j) <= numbString / 2)) {
             swap(content[j][i], content[k][i]);
-            j ++;
+            j++;
             k--;
         }
     }
