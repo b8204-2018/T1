@@ -126,12 +126,26 @@ void decodeStep7(char **&content) {
  * Смещает символы стоящие на чётных (i+j) вправо на 13 символов в таблице ASCII
  */
 void decodeStep8(char **&content) {
-
-}
+    size_t sybolsInLine = ((size_t *) (*content))[0];
+    size_t numbString = ((size_t *) (*content))[1];
+    for (size_t i = 1; i <= numbString; i ++)
+        for (size_t j = 1; j <= sybolsInLine; j++) {
+        if (((i+j)%2) == 0){
+            content[i][j]+=13;
+        }
+        }}
 
 /*
  * Смещает символы стоящие на нечётных (i+j) влево на 5 символов в таблице ASCII
  */
 void decodeStep9(char **&content) {
+    size_t sybolsInLine = ((size_t *) (*content))[0];
+    size_t numbString = ((size_t *) (*content))[1];
+    for (size_t i = 1; i <= numbString; i ++)
+        for (size_t j = 1; j <= sybolsInLine; j++) {
+            if (((i+j)%2) == 1){
+                content[i][j]-=5;
+            }
+        }
 
-}
+    }
