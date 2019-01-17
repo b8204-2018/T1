@@ -1,30 +1,31 @@
-#include <cstring>
-#include <cstdio>
 #ifndef T1_READING_LIB_H
 #define T1_READING_LIB_H
+#include <iostream>
+#include <fstream>
+#include <string>
 
-/*
- * Считывает файл, возвращая "массив" строк
- */
-char **readFile(const char *filepath){
-    int len, count;
-    FILE *f = fopen(filepath, "r");
-    if (f == NULL){
-        return nullptr;
+char **readFile(const char *filepath);
+{
+    int w=0, l=0;
+    ifstream File;
+    File.open(filepath, ios_base::in);
+    if (File.is_open()) {
+        File >> w;
+        File >> l;
+        string str;
+        if (w != 0 && l != 0) {
+            char **data = new char *[l];
+            for (int i = 0; i <= l; i++) {
+                getline(File, str);
+                data[i] = new char[w];
+                for (int j = 0; j <= w; j++) {
+                    data[i][j]=str[j];
+                }
+            }
+        }
     }
-    fscanf(f, "%d\t%d\n", &len, &count);
-    char **str = new char* [count + 1];
-    int n = sizeof(int)*2;
-    str[0] = new char[n];
-    ((int*) (*str))[0] = len;
-    ((int*) (*str))[1] = count;
-    for (int i = 1; i <= count; i++){
-        str[i] = new char [len];
-        fscanf(f, "%s", str[i]);
-    }
-    fclose(f);
-    return str;
-
+    File.close();
+    return NULL;
 }
 
 #endif //T1_READING_LIB_H
