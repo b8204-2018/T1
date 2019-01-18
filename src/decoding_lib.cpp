@@ -31,9 +31,19 @@ void decodeStep2(char **content) {
 }
 
 void decodeStep3(char **content) {
+    int a = 0;
     int len = ((int *) (*content))[0];
     int count = ((int *) (*content))[1];
     int k = len - 7;
+    try {
+        if (k < 0) {
+            throw;
+        }
+    }
+    catch (...) {
+        cout << "rip" << endl;
+
+    };
     int i = 3;
     for (int j = 1; j <= count; j++) {
         swap(content[j][i],
@@ -45,6 +55,15 @@ void decodeStep4(char **content) {
     int len = ((int *) (*content))[0];
     int count = ((int *) (*content))[1];
     int k = len - 11;
+    try {
+        if (k < 0) {
+            throw;
+        }
+    }
+    catch (...) {
+        cout << "rip" << endl;
+
+    };
     int i = 1;
     for (int j = 1; j <= count; j++) {
         swap(content[j][i],
@@ -56,32 +75,31 @@ void decodeStep5(char **&content) {
     int len = ((int *) (*content))[0];
     int count = ((int *) (*content))[1];
     char **str = new char *[count + 1];
-    for (int i = 0; i <= len; i++) {
-        str[i] = new char[count];
-        for (int j = 0; j < count; j++) {
-            str[i][j] = content[j + 1][i];
+    int N = sizeof(int) * 2;
+    str[0] = new char[N];
+    count = count + len;
+    len = count - len;
+    count = count - len;
+    for (int i = 1; i <= count + 1; i++) {
+        str[i] = new char[len];
+        for (int j = 0; j < len; j++) {
+            str[i][j] = content[j + 1][i - 1];
         }
-        str[i][count] = '\0';
+        str[i][len] = '\0';
     }
 
-    for (int i = 0; i <= count; i++) {
+    for (int i = 0; i <= len; i++) {
         delete[] content[i];
     }
     delete[] content;
 
-    count = count + len;
-    len = count - len;
-    count = count - len;
-
-    content = new char *[count + 1];
-    int N = sizeof(int) * 2;
+    content = new char *[len + 1];
     content[0] = new char[N];
     ((int *) (*content))[0] = len;
     ((int *) (*content))[1] = count;
     for (int i = 1; i <= count; i++) {
         content[i] = new char[len];
-        content[i] = "";
-        content[i] = str[i - 1];
+        content[i] = str[i];
     }
 }
 
@@ -100,7 +118,7 @@ void decodeStep7(char **content) {
     int len = ((int *) (*content))[0];
     int count = ((int *) (*content))[1];
     if ((len % 2) != 0) {
-        for (int j = 0; j <= len / 2; j += 2) {
+        for (int j = 0; j < len / 2; j += 2) {
             for (int i = 1, l = count; i <= l; i++, l--) {
                 swap(content[i][j], content[l][j]);
             }
