@@ -1,4 +1,4 @@
-#include "src/decoding_lib.h"
+#include "decoding_lib.h"
 #include <cstring>
 
 /*
@@ -141,13 +141,11 @@ void decodeStep7(char **&content){
     int column = ((int*)(*content))[0];
     int row = ((int*)(*content))[1];
     char buf;
-    for (int j = 0; j < column; j++) {
-        if ((j + 1) % 2 == 1){
-            for (int i = 1; i < row; i += 2){
-                buf = content[i][j];
-                content[i][j] = content[i + 1][j];
-                content[i + 1][j] = buf;
-            }
+    for (int j = 1; j < column; j+=2) {
+        for (int i = 1, m = row; i <= m; i++, m--){
+            buf = content[i][j];
+            content[i][j] = content[m][j];
+            content[m][j] = buf;
         }
     }
 }
@@ -160,7 +158,7 @@ void decodeStep8(char **&content){
     int row = ((int*)(*content))[1];
     for (int i = 1; i <= row; i++){
         for (int j = 0; j < column; j++){
-            if ((i + j + 1) % 2 == 0){
+            if ((i + j) % 2 == 0){
                 content[i][j] = (char)((short)(content[i][j]) + 13);
             }
         }
@@ -175,7 +173,7 @@ void decodeStep9(char **&content){
     int row = ((int*)(*content))[1];
     for (int i = 1; i <= row; i++){
         for (int j = 0; j < column; j++){
-            if ((i + j + 1) % 2 == 1){
+            if ((i + j) % 2 == 1){
                 content[i][j] = (char)((short)(content[i][j]) - 5);
             }
         }
