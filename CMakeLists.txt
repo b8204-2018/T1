@@ -9,4 +9,4 @@ file(GLOB T1_SRC
     "./src/*.cpp"
 )
 
-add_executable(T1 ${T1_SRC})
+add_executable(T1 ${T1_SRC} src/reading_lib.cpp src/printing_lib.cpp src/decoding_lib.cpp)
