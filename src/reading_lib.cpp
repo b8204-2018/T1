@@ -1,25 +1,44 @@
-#include "reading_lib.h"
-#include <cstdio>
+#include <fstream>
 #include <iostream>
+#include<string>
 
+using namespace std;
+int w, l; //кол-во столбцов,кол-во строк
 char **readFile(const char *filepath) {
-    FILE *f = fopen(filepath, "r");
-    if (f == nullptr){
-        return nullptr;
+
+    ifstream MyFile;
+
+    MyFile.open(filepath, ios_base::in);
+    if (MyFile.is_open()) {
+        w = 0;
+        l = w;
+
+        cout << "File open successful" << endl;
+
+        MyFile >> w;
+        MyFile >> l;
+        MyFile.get();
+
+        string buf;
+
+        if (w != 0 && l != 0) {
+            char **res = new char *[l];
+            for (int i = 0; i < l; i++) {
+                getline(MyFile, buf);
+                res[i] = new char[w];
+                for (int j = 0; j < w; j++) {
+                    res[i][j] = buf[j];
+                }
+            }
+            MyFile.close();
+            return res;
+
+        } else {
+            MyFile.close();
+            return nullptr;
+        }
+
     }
-    int line, column;
-    fscanf(f, "%d\t%d\n", &column, &line);
-    char **press = new char* [line + 1];
-    press[0] = new  char [2 * sizeof(int)];
-    ((int*)(*press))[0] = column;
-    ((int*)(*press))[1] = line;
-    for (int i = 1; i<= line; i++){
-        press[i] = new char [column];
-        fscanf(f, "%s\n", press[i]);
-    }
-    fclose(f);
-    return press;
-//
-// Created by Настя on 11.01.2019.
-//
+
+}
 
