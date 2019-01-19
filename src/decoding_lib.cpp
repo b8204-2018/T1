@@ -35,15 +35,8 @@ void decodeStep3(char **content) {
     int len = ((int *) (*content))[0];
     int count = ((int *) (*content))[1];
     int k = len - 7;
-    try {
         if (k < 0) {
-            throw;
-        }
-    }
-    catch (...) {
-        cout << "rip" << endl;
-
-    };
+            return 2}
     int i = 3;
     for (int j = 1; j <= count; j++) {
         swap(content[j][i],
@@ -55,15 +48,10 @@ void decodeStep4(char **content) {
     int len = ((int *) (*content))[0];
     int count = ((int *) (*content))[1];
     int k = len - 11;
-    try {
-        if (k < 0) {
-            throw;
-        }
-    }
-    catch (...) {
-        cout << "rip" << endl;
 
-    };
+        if (k < 0) {
+return 2;}
+
     int i = 1;
     for (int j = 1; j <= count; j++) {
         swap(content[j][i],
