@@ -36,7 +36,9 @@ void decodeStep3(char **content) {
     int count = ((int *) (*content))[1];
     int k = len - 7;
         if (k < 0) {
-            return 2}
+            cout<<"ошибка, длина строки меньше необходимой (decode 3)"<<endl;
+        throw;
+        }
     int i = 3;
     for (int j = 1; j <= count; j++) {
         swap(content[j][i],
@@ -50,7 +52,9 @@ void decodeStep4(char **content) {
     int k = len - 11;
 
         if (k < 0) {
-return 2;}
+            cout<<"ошибка, длина строки меньше необходимой (decode 3)"<<endl;
+        throw;
+        }
 
     int i = 1;
     for (int j = 1; j <= count; j++) {
