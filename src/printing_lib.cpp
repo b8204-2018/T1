@@ -7,19 +7,12 @@
 /*
  * Выводит в стандартный поток вывода контент
  */
-#include <fstream>
+#include "src/printing_lib.h"
 #include <iostream>
 
-using namespace std;
-
-extern int w; //кол-во столбцов
-extern int l; //кол-во строк
-
-void printContent(const char *const *const &content) {
-    for (int i = 0; i < l; i++) {
-        for (int j = 0; j < w; j++) {
-            cout << content[i][j];
-        }
-        cout << "" << endl;
+void printContent(const char** content){
+    int row = ((int*)(*content))[1];
+    for (int i = 1; i <= row; i++){
+        printf("%s\n", content[i]);
     }
 }
